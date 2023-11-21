@@ -1,15 +1,29 @@
+import { useState } from 'react';
 import Letter from '../../components/Letter';
 import tallesProfile from '../../assets/tallesProfile.jpg';
-import muriloProfile from '../../assets/muriloProfile.png'
+import muriloProfile from '../../assets/muriloProfile.png';
 import DevCard from '../../components/DevCard';
 import Button from '../../components/Button';
 import './Home.css';
+import Modal from '../../components/Modal';
 
 export default function Home() {
+    const [openModal, setOpenModal] = useState(false);
+
+    function register() {
+        console.log('funfou');
+        setOpenModal(true);
+    }
+
     const tallesLinks = {
         instagram: 'https://www.instagram.com/t.alves02/',
         linkedin: 'https://www.linkedin.com/in/t-alvesdm/',
         github: 'https://github.com/Tsplay25',
+    };
+
+    const muriloLinks = {
+        instagram: 'https://www.instagram.com/murilo_zaina/',
+        linkedin: 'https://www.linkedin.com/in/murilo-martinez-zaina-b9537629a/',
     };
 
     return (
@@ -43,9 +57,8 @@ export default function Home() {
                             <DevCard
                                 photo={muriloProfile}
                                 name="Murilo Zaina"
-                                // instagramURL={tallesLinks.instagram}
-                                // linkedinURL={tallesLinks.linkedin}
-                                // githubURL={tallesLinks.github}
+                                instagramURL={tallesLinks.instagram}
+                                linkedinURL={tallesLinks.linkedin}
                             />
                         </div>
                     </div>
@@ -53,7 +66,11 @@ export default function Home() {
                 <section className="loginFrame">
                     <div className="signUp">
                         <h2>Cadastre-se:</h2>
-                        <Button text="Cadastrar"/>
+                        <Button
+                            text="Cadastrar"
+                            func={register}
+                        />
+                        <Modal isOpen={openModal} toClose={() => setOpenModal(!openModal)}/>
                     </div>
                     <div className="signIn">
                         <h2>Ou faça login:</h2>
@@ -70,8 +87,10 @@ export default function Home() {
                                 id="password"
                                 placeholder="Digite sua senha..."
                             />
-                            <a href="" id="forgotPassword">Esqueci minha senha</a>
-                            <Button text="Entrar" type="submit"/>
+                            <a href="" id="forgotPassword">
+                                Esqueci minha senha
+                            </a>
+                            <Button text="Entrar" type="submit" />
                         </form>
                     </div>
                 </section>

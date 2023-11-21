@@ -20,9 +20,15 @@ export default function DevCard({
             />
             <legend>{name}</legend>
             <div className="icons">
-                <SocialMediaIcon icon={instaIcon} link={instagramURL} />
-                <SocialMediaIcon icon={linkedinIcon} link={linkedinURL} />
-                <SocialMediaIcon icon={githubIcon} link={githubURL} />
+                {instagramURL && (
+                    <SocialMediaIcon icon={instaIcon} link={instagramURL} />
+                )}
+                {linkedinURL && (
+                    <SocialMediaIcon icon={linkedinIcon} link={linkedinURL} />
+                )}
+                {githubURL && (
+                    <SocialMediaIcon icon={githubIcon} link={githubURL} />
+                )}
             </div>
         </div>
     );

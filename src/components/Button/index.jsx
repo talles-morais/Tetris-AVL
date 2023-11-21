@@ -1,7 +1,14 @@
-import "./Button.css"
+import './Button.css';
 
-export default function Button({ text, type, color }) {
+export default function Button({ text, type, func }) {
+
     return (
-        <button className="generalButton" type={type}>{text}</button>
-    )
+        <button
+            onClick={func}
+            className="generalButton"
+            type={type}
+        >
+            {text}
+        </button>
+    );
 }

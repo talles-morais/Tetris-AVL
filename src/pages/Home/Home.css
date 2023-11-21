@@ -1,5 +1,7 @@
 * {
     font-family: 'Audiowide', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .main {
@@ -11,6 +13,7 @@
 }
 
 .mainContent {
+    height: 100%;
     display: grid;
     grid-template-columns: 3fr 2fr;
 }
@@ -48,16 +51,20 @@
 }
 
 .loginFrame {
-    background-color: #C3C3C3;
+    background-color: #c3c3c3;
     color: #000;
     padding: 3rem 4rem;
     border-radius: 0 20px 20px 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
     font-size: 32px;
 }
 
-.signUp,
+.signUp {
+    display: flex;
+    flex-direction: column;
+}
+
 .signInForm {
     display: flex;
     flex-direction: column;
@@ -66,7 +73,7 @@
 .signInForm > label {
     font-size: 20px;
     text-decoration: underline;
-    margin: 1rem 0 .5rem 0;
+    margin: 1rem 0 0.5rem 0;
 }
 
 .signInForm > input {
@@ -77,9 +84,9 @@
 }
 
 #forgotPassword {
-    margin-top: .2rem;
+    margin-top: 0.2rem;
     font-size: 14px;
-    color: #0784CB;
+    color: #0784cb;
 }
 
 #forgotPassword:hover {
