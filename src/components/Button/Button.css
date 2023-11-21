@@ -1,0 +1,17 @@
+.generalButton {
+    background-color: #F9D313;
+    font-size: 24px;
+    width: 66%;
+    font-family: "AudioWide", sans-serif;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    align-self: center;
+}
+
+.generalButton:hover {
+    border: 1px solid #FFF;
+    color: #FFF;
+    transition: .2s;
+}

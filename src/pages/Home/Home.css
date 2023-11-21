@@ -1,0 +1,88 @@
+* {
+    font-family: 'Audiowide', sans-serif;
+}
+
+.main {
+    background-color: #320044;
+    height: 100vh;
+    width: 100vw;
+    padding: 3rem;
+    color: #fff;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+}
+
+.presentation {
+    border-radius: 20px 0 0 20px;
+    background-color: #180220;
+    height: 100%;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 64px;
+    align-self: center;
+}
+
+.subtitle {
+    font-size: 32px;
+    align-self: center;
+}
+
+.description {
+    height: 100%;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.devs {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginFrame {
+    background-color: #C3C3C3;
+    color: #000;
+    padding: 3rem 4rem;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+}
+
+.signUp,
+.signInForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.signInForm > label {
+    font-size: 20px;
+    text-decoration: underline;
+    margin: 1rem 0 .5rem 0;
+}
+
+.signInForm > input {
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+#forgotPassword {
+    margin-top: .2rem;
+    font-size: 14px;
+    color: #0784CB;
+}
+
+#forgotPassword:hover {
+    font-size: 14px;
+    color: #3e09a0;
+}
