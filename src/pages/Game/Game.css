@@ -21,6 +21,11 @@
 }
 
 .rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     grid-area: rs;
+    padding: 2rem 0;
 }
 

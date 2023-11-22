@@ -1,0 +1,9 @@
+.rateGame {
+    font-size: 24px;
+    color: #fff;
+}
+
+.stars > button {
+    border: none;
+    background-color: transparent;
+}

@@ -1,7 +1,9 @@
 import ProfileMenu from '../../components/ProfileMenu'
 import Ranking from '../../components/Ranking'
+import StatusDisplay from '../../components/StatusDisplay'
 import tallesProfile from '../../assets/tallesProfile.jpg'
 import "./Game.css"
+import RateGame from '../../components/RateGame'
 
 export default function Game() {
   return (
@@ -13,6 +15,9 @@ export default function Game() {
         <div className="gameFrame">
         </div>
         <aside className="rightSide">
+            <StatusDisplay name="Score" data="50.000"/>
+            <StatusDisplay name="Erros" data="2"/>
+            <RateGame />
         </aside>
     </main>
   )
