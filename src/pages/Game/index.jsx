@@ -2,8 +2,8 @@ import ProfileMenu from '../../components/ProfileMenu'
 import Ranking from '../../components/Ranking'
 import StatusDisplay from '../../components/StatusDisplay'
 import tallesProfile from '../../assets/tallesProfile.jpg'
-import "./Game.css"
 import RateGame from '../../components/RateGame'
+import "./Game.css"
 
 export default function Game() {
   return (

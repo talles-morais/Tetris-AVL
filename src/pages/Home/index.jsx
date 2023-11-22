@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Letter from '../../components/Letter';
 import tallesProfile from '../../assets/tallesProfile.jpg';
 import muriloProfile from '../../assets/muriloProfile.png';
 import DevCard from '../../components/DevCard';
 import Button from '../../components/Button';
-import './Home.css';
 import Modal from '../../components/Modal';
+import './Home.css';
 
 export default function Home() {
     const [openModal, setOpenModal] = useState(false);
@@ -90,7 +91,9 @@ export default function Home() {
                             <a href="" id="forgotPassword">
                                 Esqueci minha senha
                             </a>
-                            <Button text="Entrar" type="submit" />
+                            <Link to="/game">
+                                <Button text="Entrar" type="submit"/>
+                            </Link>
                         </form>
                     </div>
                 </section>

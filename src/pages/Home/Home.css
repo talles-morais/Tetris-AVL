@@ -83,10 +83,18 @@
     padding: 1rem;
 }
 
+.signInForm > a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
 #forgotPassword {
     margin-top: 0.2rem;
     font-size: 14px;
     color: #0784cb;
+    align-self: flex-start;
+    text-decoration: underline;
 }
 
 #forgotPassword:hover {
