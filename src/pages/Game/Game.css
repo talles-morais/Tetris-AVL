@@ -1,0 +1,26 @@
+.gameMain {
+    background-color: #320044;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-areas: "ls game rs";
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+.leftSide {
+    grid-area: ls;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gameFrame {
+    background-color: #000;
+    grid-area: game;
+}
+
+.rightSide {
+    grid-area: rs;
+}
+

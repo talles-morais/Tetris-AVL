@@ -1,0 +1,4 @@
+.player {
+    display: flex;
+    gap: 1rem;
+}

@@ -1,0 +1,57 @@
+.profileMenu {
+    border-radius: 20px;
+    background-color: #C3C3C3;
+    font-size: 20px;
+    margin-top: 3rem;
+    width: 90%;
+}
+
+.avatar {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid black;
+}
+
+.avatar > img {
+    border-radius: 100%;
+    width: 57px;
+    height: 57px;
+    object-fit: cover;
+}
+
+.menu {
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu > button {
+    font-size: 20px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; 
+}
+
+#logout {
+    position: relative;
+    border-radius: 0 0 20px 20px;
+}
+
+#logout::before {
+    content: ""; 
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%; 
+    height: 2px; 
+    background-color: #000; 
+  }
+
+.menu > button:hover {
+    background-color: #988888;
+    transition: .2s;
+}
