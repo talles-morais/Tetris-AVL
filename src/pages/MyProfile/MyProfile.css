@@ -1,0 +1,38 @@
+.myProfile {
+    background-color: #C3C3C3;
+    color: #000;
+    border-radius: 20px;
+    padding: 2rem;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+        "title ."
+        "change rm";
+    grid-template-columns: 2fr 1fr;
+}
+
+.myProfile > h1 {
+    font-size: 32px;
+    grid-area: title;
+}
+
+.changeData {
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 3px solid #000;
+    border-radius: 20px;
+    padding: 4rem;
+    grid-area: change;
+    gap: 3.5rem;
+}
+
+.removeAccount {
+    display: flex;
+    flex-direction: column; 
+    grid-area: rm;
+    justify-self: center;
+    width: 100%;
+    padding: 0 2rem;
+}
