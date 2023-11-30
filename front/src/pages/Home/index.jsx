@@ -1,5 +1,18 @@
 import { useState } from 'react';
+
+// react-router-dom
 import { Link } from 'react-router-dom';
+
+// React hook form
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+// yup
+import * as yup from 'yup';
+
+// axios
+import axios from 'axios'
+
 import Letter from '../../components/Letter';
 import tallesProfile from '../../assets/tallesProfile.jpg';
 import muriloProfile from '../../assets/muriloProfile.png';
@@ -8,10 +21,39 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import './Home.css';
 
+const schema = yup.object({
+    nickname: yup.string().required('Campo obrigatório'),
+    password: yup.string().required('Campo obrigatório')
+}).required();
+
 export default function Home() {
     const [openModal, setOpenModal] = useState(false);
+    const [validate, setValidate] = useState('');
 
-    function register() {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
+
+    const submit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:3000/login', data);
+
+            const token = response.data.token;
+            sessionStorage.setItem('token', token);
+            if(token)
+                setValidate('Validado');
+        }catch(error) {
+            setValidate(error.response.data);
+        }
+    };
+
+    if(validate.toLowerCase().includes('autenticado')){
+        return <Navigate to='/game' />
+    }
+
+    function signUp() {
         console.log('funfou');
         setOpenModal(true);
     }
@@ -24,7 +66,8 @@ export default function Home() {
 
     const muriloLinks = {
         instagram: 'https://www.instagram.com/murilo_zaina/',
-        linkedin: 'https://www.linkedin.com/in/murilo-martinez-zaina-b9537629a/',
+        linkedin:
+            'https://www.linkedin.com/in/murilo-martinez-zaina-b9537629a/',
     };
 
     return (
@@ -58,8 +101,8 @@ export default function Home() {
                             <DevCard
                                 photo={muriloProfile}
                                 name="Murilo Zaina"
-                                instagramURL={tallesLinks.instagram}
-                                linkedinURL={tallesLinks.linkedin}
+                                instagramURL={muriloLinks.instagram}
+                                linkedinURL={muriloLinks.linkedin}
                             />
                         </div>
                     </div>
@@ -67,33 +110,41 @@ export default function Home() {
                 <section className="loginFrame">
                     <div className="signUp">
                         <h2>Cadastre-se:</h2>
-                        <Button
-                            text="Cadastrar"
-                            func={register}
+                        <Button text="Cadastrar" func={signUp} />
+                        <Modal
+                            isOpen={openModal}
+                            toClose={() => setOpenModal(!openModal)}
                         />
-                        <Modal isOpen={openModal} toClose={() => setOpenModal(!openModal)}/>
                     </div>
                     <div className="signIn">
                         <h2>Ou faça login:</h2>
-                        <form action="" className="signInForm">
+                        <form
+                            className="signInForm"
+                            onSubmit={handleSubmit(submit)}
+                            noValidate
+                        >
                             <label htmlFor="nickname">Nickname:</label>
                             <input
                                 type="text"
                                 id="nickname"
                                 placeholder="Digite seu apelido..."
+                                {...register('nickname')}
                             />
+                            <span className="error">{errors?.nickname?.message}</span>
                             <label htmlFor="password">Senha:</label>
                             <input
-                                type="text"
+                                type="password"
                                 id="password"
                                 placeholder="Digite sua senha..."
+                                {...register('password')}
                             />
+                            <span className="error">{errors?.password?.message}</span>
                             <a href="" id="forgotPassword">
                                 Esqueci minha senha
                             </a>
-                            <Link to="/game">
-                                <Button text="Entrar" type="submit"/>
-                            </Link>
+                            {/* <Link to="/game"> */}
+                            <Button text="Entrar" type="submit" />
+                            {/* </Link> */}
                         </form>
                     </div>
                 </section>
