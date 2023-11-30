@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // react-router-dom
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // React hook form
 import { useForm } from 'react-hook-form';
@@ -142,9 +142,9 @@ export default function Home() {
                             <a href="" id="forgotPassword">
                                 Esqueci minha senha
                             </a>
-                            {/* <Link to="/game"> */}
+                            
                             <Button text="Entrar" type="submit" />
-                            {/* </Link> */}
+        
                         </form>
                     </div>
                 </section>

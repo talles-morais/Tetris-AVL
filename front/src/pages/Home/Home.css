@@ -89,6 +89,12 @@
     text-decoration: none;
 }
 
+.error {
+    color: #f14343;
+    font-size: 12px;
+    margin-top: 0.2rem;
+}
+
 #forgotPassword {
     margin-top: 0.2rem;
     font-size: 14px;
