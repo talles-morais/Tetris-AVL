@@ -1,8 +1,11 @@
+require("dotenv").config();
 const express = require('express');
 const app = express();
-const fs = require('fs');
 const cors = require('cors');
-const { stringify } = require('querystring');
+const path = require('path');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { readFile, writeFile } = require('fs').promises;
 
 app.use(express.json());
 app.use(cors());
@@ -15,40 +18,64 @@ const User = require('./User');
 
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/pages/Home', (req, res) => {
-    const {email, senha} = req.body
-    const data = JSON.parse(fs.readFileSync('./db/banco-dados-usuario.json', { encoding: 'utf8', flag: 'r' }));
-    for(let user of data){
-        if(user.email === email) {
-            if(user.senha === senha) {
-                res.send('Autenticado com Sucesso')
-                break;
-            }else{
-                    res.send('Usuario ou senha incorretos')
-                }                   
+ app.post('/login', async (req, res) => {
+     const {nickname, password} = req.body; 
+     const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+     const data = JSON.parse(await readFile(jsonPath, { encoding: 'utf8', flag: 'r' }));
+
+     //verifica se existe usuario com o nick digitado    
+     for (let user of data){
+         if(user.nickname === nickname){
+             const senhaValidada = await bcrypt.compare(password, user.password);
+             if(senhaValidada){ 
                 
-            }
-        }
-        res.send(`Usuario com email ${email} não
-                existe. Crie uma conta para logar!.`)
-    }); 
+                 const token = jwt.sign(user, process.env.TOKEN);
 
-app.post('/create', (req, res) => {
-    const {nickname, email, senha} = req.body
-    const data = JSON.parse(fs.readFileSync('./db/banco-dados-usuario.json', { encoding: 'utf8', flag: 'r' }));
+                 return res.json({ "token" : token});
+             }
+                      
+             else
+                 return res.status(422).send(`Usuario ou senha incorretos.`);
+         }       
+     }
+     return res.status(409).send(`Usuario com nick ${nickname} não existe. Considere criar uma conta!`);
+
+ }); 
+
+ app.post('/create', async (req, res) => {
+    const {nickname, email, password} = req.body
+    const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+    const data = JSON.parse(await readFile(jsonPath, { encoding: 'utf8', flag: 'r' }));
     for(let user of data){
-        if(user.email === email) {
-            res.status(409).send(`Usuario com email ${email} não
-            existe. Crie uma conta para logar!.`)
+        if(user.nickname === nickname) {
+            res.status(409).send(`Usuario com nick ${nickname} não existe. Crie uma conta para logar!.`)
             break;
-        }
-        const id = data.length + 1;
+         }
+         const id = data.length + 1;
 
-        const novo = new User(id, nickname, email, senha);
-            data.push(novo);
-            fs.readFileSync('./db/banco-dados-usuario.json', JSON,
-            stringify(data, null, 2),
-            res.send('Usuario criado com sucesso.'));
-        }
-    }
-);
+         const salt = await bcrypt.genSalt(10);
+         const senhaCrypt = await bcrypt.hash(password,salt);
+
+         const novo = new User(id, nickname, email, senhaCrypt);
+         data.push(novo);
+         await writeFile(jsonPath,JSON.stringify(data,null,2));
+         res.send(`Tudo certo usuario criado com sucesso.`);
+         }
+     }
+ );
+
+
+ function verificaToken(req,res,next){
+     const authHeaders = req.headers['authorization'];
+    
+     const token = authHeaders && authHeaders.split(' ')[1]
+     //Bearer token
+
+     if(token == null) return res.status(401).send('Acesso Negado');
+
+     jwt.verify(token, process.env.TOKEN, (err) => {
+         if(err) return res.status(403).send('Token Inválido/Expirado');
+         next();
+     })
+
+ }

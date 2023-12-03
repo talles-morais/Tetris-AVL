@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nickname": "murilo",
+    "email": "murilo@gmail.com",
+    "senha": "$2b$10$axppktS76qWoXQwtuLusSOaWCylSYbk4rxYaK/bSNVsVHhDkohG/q"
+  },
+  {
+    "id": 2,
+    "nickname": "wev",
+    "email": "wev@gmail.com",
+    "senha": "$2b$10$6S.oE5ClET.QOYgzw.g26OvYJ5lhcwa3GhIv59gOYGdg1HnO102xe"
+  },
+  {
+    "id": 3,
+    "nickname": "reizin",
+    "email": "rei@gmail.com",
+    "senha": "$2b$10$9X7QfcdoQ5XSVVS225w3du.cRL3HIIGUUwXkT/GgrHGoNU4KPw6Le"
+  },
+  {
+    "id": 4,
+    "nickname": "tuts",
+    "email": "tuts@gmail.com",
+    "senha": "$2b$10$eqCvpfRTyy8JGZz4eprHxegvQuKts7rE1A0kxSbAvfRA6bn.Awi3G"
+  },
+  {
+    "id": 5,
+    "nickname": "tuts",
+    "email": "tuts@gmail.com",
+    "senha": "$2b$10$kB/IOwy2Vzz0bo4j/hVv7u1M/JZtZA7bafJbW2g/ogHJMGNB6Bm8i"
+  }
+]
