@@ -1,32 +1,20 @@
 [
   {
     "id": 1,
-    "nickname": "murilo",
-    "email": "murilo@gmail.com",
-    "senha": "$2b$10$axppktS76qWoXQwtuLusSOaWCylSYbk4rxYaK/bSNVsVHhDkohG/q"
+    "nickname": "tsplay24532",
+    "email": "talles25@gmail.com",
+    "password": "$2b$10$RUAIO.1TOD0L8SqLEdr8j.zJj72kTblMpf8tKedg7q.pwuJHQEwEu"
   },
   {
     "id": 2,
-    "nickname": "wev",
-    "email": "wev@gmail.com",
-    "senha": "$2b$10$6S.oE5ClET.QOYgzw.g26OvYJ5lhcwa3GhIv59gOYGdg1HnO102xe"
+    "nickname": "murilove",
+    "email": "muriloOBrabo123@gmail.com",
+    "password": "$2b$10$/QZhOnj.9UznjYD9zgC6oe1Yf6Pb8rKCU725r7Ztc67yj7q1hdnku"
   },
   {
     "id": 3,
-    "nickname": "reizin",
-    "email": "rei@gmail.com",
-    "senha": "$2b$10$9X7QfcdoQ5XSVVS225w3du.cRL3HIIGUUwXkT/GgrHGoNU4KPw6Le"
-  },
-  {
-    "id": 4,
-    "nickname": "tuts",
-    "email": "tuts@gmail.com",
-    "senha": "$2b$10$eqCvpfRTyy8JGZz4eprHxegvQuKts7rE1A0kxSbAvfRA6bn.Awi3G"
-  },
-  {
-    "id": 5,
-    "nickname": "tuts",
-    "email": "tuts@gmail.com",
-    "senha": "$2b$10$kB/IOwy2Vzz0bo4j/hVv7u1M/JZtZA7bafJbW2g/ogHJMGNB6Bm8i"
+    "nickname": "teste",
+    "email": "testando@gmail.com",
+    "password": "$2b$10$5Wjuq8vvIUijCn1Rm9CUSuBVUpt.agAZKP2GHlwQtYrcSveRpn6Te"
   }
 ]

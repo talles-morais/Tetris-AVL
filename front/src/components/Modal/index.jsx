@@ -39,7 +39,7 @@ export default function Modal({ isOpen, toClose }) {
             const response = await axios.post('http://localhost:3000/create', data);
             setValidate(response.data);
             if(response.data.includes('criado'))
-                <Navigate to='/'/>
+                toClose();
         } catch (error) {
             setValidate(error.response.data);
         }   

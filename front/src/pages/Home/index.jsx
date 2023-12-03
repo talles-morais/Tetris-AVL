@@ -49,7 +49,7 @@ export default function Home() {
         }
     };
 
-    if(validate.toLowerCase().includes('autenticado')){
+    if(validate.toLowerCase().includes('validado')){
         return <Navigate to='/game' />
     }
 
