@@ -11,9 +11,14 @@
     grid-template-columns: 2fr 1fr;
 }
 
-.myProfile > h1 {
-    font-size: 32px;
+.titleContainer {
+    display: flex;
+    gap: 2rem;
     grid-area: title;
+}
+
+.titleContainer > h1 {
+    font-size: 32px;
 }
 
 .changeData {
