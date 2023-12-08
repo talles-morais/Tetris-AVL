@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
 import { Link } from 'react-router-dom';
@@ -5,6 +6,34 @@ import goBackIcon from '../../assets/icons/goBack.png';
 import './MyProfile.css';
 
 export default function MyProfile() {
+    const [validate, setValidate] = useState(false);
+
+    const config = {
+        headers: {
+            Authorization: 'Bearer '.concat(sessionStorage.getItem('token')),
+        },
+    };
+
+    useEffect(() => {
+        async function valida() {
+            try {
+                const resposta = await axios.get(
+                    `http://localhost:3000/profile`,
+                    config
+                );
+                console.log(resposta);
+                if (resposta.status === 200) setValidate(true);
+            } catch (error) {
+                setValidate(false);
+            }
+        }
+        valida();
+    }, []);
+
+    if(!validate){
+        return <p>Token Inválido, faça login!</p>
+    }
+
     return (
         <main className="main">
             <section className="myProfile">

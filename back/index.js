@@ -84,6 +84,15 @@ app.post('/create', async (req, res) => {
     res.send(`Tudo certo usuario criado com sucesso.`);
 });
 
+app.get('/game', verificaToken,  (req,res) => {
+
+    const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+    const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
+
+    return res.json(users);
+
+})
+
 function verificaToken(req, res, next) {
     const authHeaders = req.headers['authorization'];
 
