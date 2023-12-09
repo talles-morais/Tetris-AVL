@@ -54,7 +54,6 @@ export default function Home() {
     }
 
     function signUp() {
-        console.log('funfou');
         setOpenModal(true);
     }
 

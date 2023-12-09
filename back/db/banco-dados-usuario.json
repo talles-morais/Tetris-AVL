@@ -16,5 +16,11 @@
     "nickname": "teste",
     "email": "testando@gmail.com",
     "password": "$2b$10$5Wjuq8vvIUijCn1Rm9CUSuBVUpt.agAZKP2GHlwQtYrcSveRpn6Te"
+  },
+  {
+    "id": 4,
+    "nickname": "tam",
+    "email": "tam@tm.com",
+    "password": "$2b$10$9t36NF7szEeKmAGSN1CDze.WAlujMwArAr2JrogyejhiYxVU8Doae"
   }
 ]

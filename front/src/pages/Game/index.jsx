@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import ProfileMenu from '../../components/ProfileMenu';
 import Ranking from '../../components/Ranking';
 import StatusDisplay from '../../components/StatusDisplay';
@@ -18,13 +19,14 @@ export default function Game() {
     useEffect(() => {
         async function valida() {
             try {
-                const resposta = await axios.get(
-                    `http://localhost:3000/game`,
+                const resposta = await axios.get(   
+                    "http://localhost:3000/game",
                     config
                 );
-                console.log(resposta);
+                console.log(resposta.status);
                 if (resposta.status === 200) setValidate(true);
             } catch (error) {
+                console.log(error);
                 setValidate(false);
             }
         }
