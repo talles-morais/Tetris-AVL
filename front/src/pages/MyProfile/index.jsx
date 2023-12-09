@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios';
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
 import { Link } from 'react-router-dom';
@@ -18,12 +19,13 @@ export default function MyProfile() {
         async function valida() {
             try {
                 const resposta = await axios.get(
-                    `http://localhost:3000/profile`,
+                    "http://localhost:3000/profile",
                     config
                 );
-                console.log(resposta);
+                console.log(resposta.status);
                 if (resposta.status === 200) setValidate(true);
             } catch (error) {
+                console.log(error);
                 setValidate(false);
             }
         }
