@@ -11,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 // axios
-import axios from 'axios'
+import axios from 'axios';
 
 import Letter from '../../components/Letter';
 import tallesProfile from '../../assets/tallesProfile.jpg';
@@ -20,13 +20,17 @@ import DevCard from '../../components/DevCard';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import './Home.css';
+import { useAuth } from '../../contexts/AuthContext';
 
-const schema = yup.object({
-    nickname: yup.string().required('Campo obrigatório'),
-    password: yup.string().required('Campo obrigatório')
-}).required();
+const schema = yup
+    .object({
+        nickname: yup.string().required('Campo obrigatório'),
+        password: yup.string().required('Campo obrigatório'),
+    })
+    .required();
 
 export default function Home() {
+    const { login } = useAuth();
     const [openModal, setOpenModal] = useState(false);
     const [validate, setValidate] = useState('');
 
@@ -38,19 +42,21 @@ export default function Home() {
 
     const submit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:3000/login', data);
-
+            const response = await axios.post(
+                'http://localhost:3000/login',
+                data
+            );
+            login(response.user);
             const token = response.data.token;
             sessionStorage.setItem('token', token);
-            if(token)
-                setValidate('Validado');
-        }catch(error) {
+            if (token) setValidate('Validado');
+        } catch (error) {
             setValidate(error.response.data);
         }
     };
 
-    if(validate.toLowerCase().includes('validado')){
-        return <Navigate to='/game' />
+    if (validate.toLowerCase().includes('validado')) {
+        return <Navigate to="/game" />;
     }
 
     function signUp() {
@@ -129,7 +135,9 @@ export default function Home() {
                                 placeholder="Digite seu apelido..."
                                 {...register('nickname')}
                             />
-                            <span className="error">{errors?.nickname?.message}</span>
+                            <span className="error">
+                                {errors?.nickname?.message}
+                            </span>
                             <label htmlFor="password">Senha:</label>
                             <input
                                 type="password"
@@ -137,13 +145,14 @@ export default function Home() {
                                 placeholder="Digite sua senha..."
                                 {...register('password')}
                             />
-                            <span className="error">{errors?.password?.message}</span>
+                            <span className="error">
+                                {errors?.password?.message}
+                            </span>
                             <a href="" id="forgotPassword">
                                 Esqueci minha senha
                             </a>
-                            
+
                             <Button text="Entrar" type="submit" />
-        
                         </form>
                     </div>
                 </section>

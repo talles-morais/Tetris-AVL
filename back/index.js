@@ -41,7 +41,7 @@ app.post('/login', async (req, res) => {
                 if (senhaValidada) {
                     const token = jwt.sign(user, process.env.TOKEN);
                     console.log('usuario validado');
-                    return res.json({ token: token });
+                    return res.json({ user: user, token: token });
                 } else
                     return res.status(422).send(`Usuario ou senha incorretos.`);
             } else {
@@ -117,28 +117,27 @@ function verificaToken(req, res, next) {
 }
 
 
-app.post('/profile', async (req, res) => {
-    const { nickname, email, password } = req.body;
-    const jsonPath = path.join(
-        __dirname,
-        '.',
-        'db',
-        'banco-dados-usuario.json'
-    );
-    const data = JSON.parse(
-        fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' })
-    );
-    const userIndex = data.findIndex(
-        user => user.nickname === nickname && user.email === email && user.password === password
-    );
-    if (userIndex !== -1) {
-        data.splice(userIndex, 1);
+app.delete('/profile', async (req, res) => {
+    console.log(req.body);
+    try {
+        const user = req.body;
 
-        // Salva as alterações de volta no arquivo JSON
-        fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), {encoding: 'utf8', flag: 'w' });
+        const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+        const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
 
-        res.status(200).json({ message: 'Usuário removido com sucesso' });
+        // Encontre e exclua o usuário no array de usuários
+        const updatedUsers = users.filter(existingUser => existingUser.email !== user.email);
+
+        // Salve as alterações de volta no arquivo JSON
+        fs.writeFileSync(jsonPath, JSON.stringify(updatedUsers, null, 2), 'utf-8');
+
+        // Envie uma resposta de volta ao cliente
+        res.send('Usuário excluído com sucesso');
+    } catch (error) {
+        console.error('Erro ao excluir usuário:', error);
+        res.status(500).send('Erro ao processar a solicitação');
     }
+
 });
 
 app.post('/profile', async (req, res) => {

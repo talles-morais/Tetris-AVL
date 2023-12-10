@@ -5,9 +5,11 @@ import FormField from '../../components/FormField';
 import { Link } from 'react-router-dom';
 import goBackIcon from '../../assets/icons/goBack.png';
 import './MyProfile.css';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function MyProfile() {
     const [validate, setValidate] = useState(false);
+    const user = useAuth();
 
     const config = {
         headers: {
@@ -34,6 +36,21 @@ export default function MyProfile() {
 
     if(!validate){
         return <p>Token Inválido, faça login!</p>
+    }
+
+    const handleDeleteUser = async () => {
+        try {
+            const response = await axios.delete("http://localhost:3000/profile", {
+                data: user,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log(response.data.message); // Mensagem do servidor
+        } catch (error) {
+            console.log('Erro ao excluir usuário:', error.response?.data || error.message);
+        }
     }
 
     return (
@@ -75,7 +92,7 @@ export default function MyProfile() {
                 </form>
                 <div className="removeAccount">
                     <h2>Remova sua conta:</h2>
-                    <Button text="Remover conta" type="button" />
+                    <Button text="Remover conta" type="button" func={handleDeleteUser}/>
                 </div>
             </section>
         </main>
