@@ -115,3 +115,55 @@ function verificaToken(req, res, next) {
         next();
     });
 }
+
+
+app.post('/profile', async (req, res) => {
+    const { nickname, email, password } = req.body;
+    const jsonPath = path.join(
+        __dirname,
+        '.',
+        'db',
+        'banco-dados-usuario.json'
+    );
+    const data = JSON.parse(
+        fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' })
+    );
+    const userIndex = data.findIndex(
+        user => user.nickname === nickname && user.email === email && user.password === password
+    );
+    if (userIndex !== -1) {
+        data.splice(userIndex, 1);
+
+        // Salva as alterações de volta no arquivo JSON
+        fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), {encoding: 'utf8', flag: 'w' });
+
+        res.status(200).json({ message: 'Usuário removido com sucesso' });
+    }
+});
+
+app.post('/profile', async (req, res) => {
+    const { nickname, email, password } = req.body;
+    const jsonPath = path.join(
+        __dirname,
+        '.',
+        'db',
+        'banco-dados-usuario.json'
+    );
+    const data = JSON.parse(
+        fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' })
+    );
+    const userIndex = data.findIndex(
+        user => user.nickname === nickname && user.email === email && user.password === password
+    );
+    if (userIndex !== -1) {
+        // Modifica as informações do usuário
+        data[userIndex].nickname = req.body.newNickname || data[userIndex].nickname;
+        data[userIndex].email = req.body.newEmail || data[userIndex].email;
+        data[userIndex].password = req.body.newPassword || data[userIndex].password;
+
+        // Salva as alterações de volta no arquivo JSON
+        fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), { encoding: 'utf8', flag: 'w'});
+
+        res.status(200).json({ message: 'Informações do usuário modificadas com sucesso'});
+    }
+});
