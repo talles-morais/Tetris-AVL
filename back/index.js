@@ -117,7 +117,7 @@ function verificaToken(req, res, next) {
 }
 
 
-app.delete('/profile', async (req, res) => {
+app.delete('/profile', verificaToken, async (req, res) => {
     console.log(req.body);
     try {
         const user = req.body;
@@ -140,7 +140,7 @@ app.delete('/profile', async (req, res) => {
 
 });
 
-app.post('/profile', async (req, res) => {
+app.put('/profile', async (req, res) => {
     const { nickname, email, password } = req.body;
     const jsonPath = path.join(
         __dirname,

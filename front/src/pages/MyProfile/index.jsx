@@ -40,18 +40,19 @@ export default function MyProfile() {
 
     const handleDeleteUser = async () => {
         try {
+            const token = localStorage.getItem('token')
             const response = await axios.delete("http://localhost:3000/profile", {
-                data: user,
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
                 },
             });
-
+    
             console.log(response.data.message); // Mensagem do servidor
         } catch (error) {
             console.log('Erro ao excluir usuário:', error.response?.data || error.message);
         }
-    }
+    };
 
     return (
         <main className="main">
