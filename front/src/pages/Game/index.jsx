@@ -3,12 +3,14 @@ import axios from 'axios';
 import ProfileMenu from '../../components/ProfileMenu';
 import Ranking from '../../components/Ranking';
 import StatusDisplay from '../../components/StatusDisplay';
-import tallesProfile from '../../assets/tallesProfile.jpg';
+import userIcon from '../../assets/icons/userIcon.png';
 import RateGame from '../../components/RateGame';
+import { useAuth } from '../../contexts/AuthContext';
 import './Game.css';
 
 export default function Game() {
     const [validate, setValidate] = useState(false);
+    const { user, logout } = useAuth();
 
     const config = {
         headers: {
@@ -40,7 +42,7 @@ export default function Game() {
     return (
         <main className="gameMain">
             <aside className="leftSide">
-                <ProfileMenu photo={tallesProfile} nickname="Talles" />
+                <ProfileMenu photo={userIcon} nickname={user.nickname} logout={logout}/>
                 <Ranking />
             </aside>
             <div className="gameFrame"></div>

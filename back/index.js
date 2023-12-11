@@ -169,7 +169,9 @@ app.put('/profile', async (req, res) => {
         // Modifica as informações do usuário
         data[userIndex].nickname = req.body.newNickname || data[userIndex].nickname;
         data[userIndex].email = req.body.newEmail || data[userIndex].email;
-        data[userIndex].password = req.body.newPassword || data[userIndex].password;
+        const salt = await bcrypt.genSalt(10);
+        const senhaCrypt = await bcrypt.hash(req.body.newPassword, salt);
+        data[userIndex].password = senhaCrypt || data[userIndex].password;
         
 
         // Salva as alterações de volta no arquivo JSON
