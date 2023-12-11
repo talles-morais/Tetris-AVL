@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     // Por exemplo, você pode fazer uma chamada de API para verificar as credenciais.
 
     // Se a autenticação for bem-sucedida, defina o usuário no estado.
+    console.log("setting user: ", userData)
     setUser(userData);
   };
 
@@ -19,6 +20,7 @@ export const AuthProvider = ({ children }) => {
 
     // Limpe o estado do usuário.
     setUser(null);
+    sessionStorage.removeItem("token")
   };
 
   return (

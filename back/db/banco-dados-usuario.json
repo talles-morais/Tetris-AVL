@@ -16,5 +16,17 @@
     "nickname": "teste",
     "email": "testando@gmail.com",
     "password": "$2b$10$5Wjuq8vvIUijCn1Rm9CUSuBVUpt.agAZKP2GHlwQtYrcSveRpn6Te"
+  },
+  {
+    "id": 4,
+    "nickname": "opaopa",
+    "email": "opa@gmail.com",
+    "password": "$2b$10$WdXiOrmw5yKWWsmW0A9cgeNeFZMTFR1MGQuXermXtOBXxwVkckOpG"
+  },
+  {
+    "id": 5,
+    "nickname": "eusou",
+    "email": "eusou@gmail.com",
+    "password": "$2b$10$4AiIBkX61GidYA/55bOkhOwqK7XDqM9Bi5l/okjAm47IT9YsB8xUa"
   }
 ]

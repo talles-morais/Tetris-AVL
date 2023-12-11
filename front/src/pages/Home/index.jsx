@@ -46,7 +46,7 @@ export default function Home() {
                 'http://localhost:3000/login',
                 data
             );
-            login(response.user);
+            login(response.data.user);
             const token = response.data.token;
             sessionStorage.setItem('token', token);
             if (token) setValidate('Validado');

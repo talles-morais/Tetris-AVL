@@ -118,20 +118,27 @@ function verificaToken(req, res, next) {
 
 
 app.delete('/profile', verificaToken, async (req, res) => {
-    console.log(req.body);
+    console.log("req body", req.body)
     try {
-        const user = req.body;
-
+        const userId = req.body.id;
+        console.log("userId is", userId)
         const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
         const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
+        console.log('users: ', users)
+        //Encontra o usuário pelo ID
+        const userIndex = users.findIndex(u => u.id === userId);
+        console.log('userIndex: ', userIndex)
+        if (userIndex === -1) {
+            return res.status(404).send('Usuário não encontrado');
+        }
 
-        // Encontre e exclua o usuário no array de usuários
-        const updatedUsers = users.filter(existingUser => existingUser.email !== user.email);
+        // Encontra e exclue o usuário no array de usuários
+        users.splice(userIndex, 1);
 
-        // Salve as alterações de volta no arquivo JSON
-        fs.writeFileSync(jsonPath, JSON.stringify(updatedUsers, null, 2), 'utf-8');
+        // Salva as alterações de volta no arquivo JSON
+        fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), 'utf-8');
 
-        // Envie uma resposta de volta ao cliente
+        // Envia uma resposta de volta ao cliente
         res.send('Usuário excluído com sucesso');
     } catch (error) {
         console.error('Erro ao excluir usuário:', error);
@@ -140,7 +147,7 @@ app.delete('/profile', verificaToken, async (req, res) => {
 
 });
 
-app.put('/profile', async (req, res) => {
+app.put('/profile', verificaToken, async (req, res) => {
     const { nickname, email, password } = req.body;
     const jsonPath = path.join(
         __dirname,
