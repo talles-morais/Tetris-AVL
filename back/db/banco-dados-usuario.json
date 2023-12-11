@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "id": 1,
+    "nickname": "talves",
+    "email": "talles",
+    "password": "$2b$10$hckBkJ4Oqp2vYSnU5SefdOx.HY9WjqUeOdwRW4AGmL1G3PNIFGVU6"
+  }
+]

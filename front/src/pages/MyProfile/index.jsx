@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '../../components/Button';
 import FormField from '../../components/FormField';
@@ -18,13 +18,13 @@ const schema = yup
         newEmail: yup.string(),
         newNickname: yup.string(),
         newPassword: yup.string(),
-        confirmPassword: yup.string()
+        confirmPassword: yup.string(),
     })
     .required();
 
 export default function MyProfile() {
     const [validate, setValidate] = useState(false);
-    const {user, logout} = useAuth();
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const {
@@ -43,7 +43,7 @@ export default function MyProfile() {
         async function valida() {
             try {
                 const resposta = await axios.get(
-                    "http://localhost:3000/profile",
+                    'http://localhost:3000/profile',
                     config
                 );
                 console.log(resposta.status);
@@ -56,25 +56,28 @@ export default function MyProfile() {
         valida();
     }, []);
 
-    if(!validate){
-        return <p>Token Inválido, faça login!</p>
+    if (!validate) {
+        return <p>Token Inválido, faça login!</p>;
     }
 
     const handleDeleteUser = async () => {
         try {
-            console.log("context user is", user)
-            const token = sessionStorage.getItem('token')
-            const response = await axios.delete("http://localhost:3000/profile", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
-                },
-                data : user
-            });
+            console.log('context user is', user);
+            const token = sessionStorage.getItem('token');
+            const response = await axios.delete(
+                'http://localhost:3000/profile',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`, // Adiciona o token de autorização
+                    },
+                    data: user,
+                }
+            );
 
             alert(response.data); // Mensagem do servidor
-            logout()
-            navigate("/")
+            logout();
+            navigate('/');
         } catch (error) {
             console.error('Erro ao excluir usuário:', error);
 
@@ -88,7 +91,10 @@ export default function MyProfile() {
                 console.error('Erro de solicitação:', error.request);
             } else {
                 // Algo aconteceu ao configurar a solicitação
-                console.error('Erro ao configurar a solicitação:', error.message);
+                console.error(
+                    'Erro ao configurar a solicitação:',
+                    error.message
+                );
             }
 
             // Trate o erro conforme necessário, como exibindo uma mensagem de erro amigável para o usuário
@@ -98,23 +104,23 @@ export default function MyProfile() {
     const updateUser = async (data) => {
         try {
             console.log(user);
-            const token = sessionStorage.getItem('token')
-            const response = await axios.put("http://localhost:3000/profile",{
+            const token = sessionStorage.getItem('token');
+            const response = await axios.put('http://localhost:3000/profile', {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
+                    Authorization: `Bearer ${token}`, // Adiciona o token de autorização
                 },
                 userId: user.id,
                 newEmail: data.newEmail,
                 newNickname: data.newNickname,
                 newPassword: data.newPassword,
-                confirmPassword: data.confirmPassword
+                confirmPassword: data.confirmPassword,
             });
             console.log(response.data);
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <main className="main">
@@ -125,24 +131,54 @@ export default function MyProfile() {
                     </Link>
                     <h1>Meu Perfil</h1>
                 </div>
-                <form className="changeData" autoComplete="custom-value" onSubmit={handleSubmit(updateUser)} noValidate>
-                    
+                <form
+                    className="changeData"
+                    autoComplete="custom-value"
+                    onSubmit={handleSubmit(updateUser)}
+                    noValidate
+                >
+                    <div className="field">
                         <label htmlFor="email">Email:</label>
-                        <input type="text" id="email" placeholder="Digite seu email..." {...register("newEmail")}/>
+                        <input
+                            type="text"
+                            id="email"
+                            placeholder="Digite seu email..."
+                            {...register('newEmail')}
+                        />
                         {errors?.newEmail?.message}
-                    
+                    </div>
+                    <div className="field">
                         <label htmlFor="nickname">Nickname:</label>
-                        <input type="text" id="nickname" placeholder="Digite seu apelido..." {...register("newNickname")} />
+                        <input
+                            type="text"
+                            id="nickname"
+                            placeholder="Digite seu apelido..."
+                            {...register('newNickname')}
+                        />
                         {errors?.newNickname?.message}
-
+                    </div>
+                    <div className="field">
                         <label htmlFor="password">Senha:</label>
-                        <input type="password" id="password" placeholder="Digite uma nova senha..." {...register("newPassword")} />
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Digite uma nova senha..."
+                            {...register('newPassword')}
+                        />
                         {errors?.newPassword?.message}
-                    
-                        <label htmlFor="passwordConfirm">Confirme sua senha</label>
-                        <input type="password" id="passwordConfirm" placeholder="Digite sua senha novamente..." {...register("confirmPassword")} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="passwordConfirm">
+                            Confirme sua senha
+                        </label>
+                        <input
+                            type="password"
+                            id="passwordConfirm"
+                            placeholder="Digite sua senha novamente..."
+                            {...register('confirmPassword')}
+                        />
                         {errors?.confirmPassword?.message}
-                    
+                    </div>
                     <Button text="Alterar dados" type="submit" />
                 </form>
                 <div className="removeAccount">
@@ -154,7 +190,11 @@ export default function MyProfile() {
                         placeholder="Digite sua senha para confirmar a remoção da conta..."
                         autocomplete="current-password" // Adiciona o atributo autocomplete
                     />
-                    <Button text="Remover conta" type="button" func={handleDeleteUser}/>
+                    <Button
+                        text="Remover conta"
+                        type="button"
+                        func={handleDeleteUser}
+                    />
                 </div>
             </section>
         </main>
