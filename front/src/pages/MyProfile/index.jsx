@@ -6,11 +6,32 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import goBackIcon from '../../assets/icons/goBack.png';
 import './MyProfile.css';
 import { useAuth } from '../../contexts/AuthContext';
+// React hook form
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+// yup
+import * as yup from 'yup';
+
+const schema = yup
+    .object({
+        newEmail: yup.string(),
+        newNickname: yup.string(),
+        newPassword: yup.string(),
+        confirmPassword: yup.string()
+    })
+    .required();
 
 export default function MyProfile() {
     const [validate, setValidate] = useState(false);
     const {user, logout} = useAuth();
     const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
 
     const config = {
         headers: {
@@ -39,40 +60,61 @@ export default function MyProfile() {
         return <p>Token Inválido, faça login!</p>
     }
 
-const handleDeleteUser = async () => {
-    try {
-        console.log("context user is", user)
-        const token = sessionStorage.getItem('token')
-        const response = await axios.delete("http://localhost:3000/profile", {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
-            },
-            data : user
-        });
+    const handleDeleteUser = async () => {
+        try {
+            console.log("context user is", user)
+            const token = sessionStorage.getItem('token')
+            const response = await axios.delete("http://localhost:3000/profile", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
+                },
+                data : user
+            });
 
-        alert(response.data); // Mensagem do servidor
-        logout()
-        navigate("/")
-    } catch (error) {
-        console.error('Erro ao excluir usuário:', error);
+            alert(response.data); // Mensagem do servidor
+            logout()
+            navigate("/")
+        } catch (error) {
+            console.error('Erro ao excluir usuário:', error);
 
-        // Adicione este bloco para imprimir mais informações sobre o erro
-        if (error.response) {
-            // O servidor retornou um status diferente de 2xx
-            console.error('Status do erro:', error.response.status);
-            console.error('Dados do erro:', error.response.data);
-        } else if (error.request) {
-            // A solicitação foi feita, mas não recebeu resposta
-            console.error('Erro de solicitação:', error.request);
-        } else {
-            // Algo aconteceu ao configurar a solicitação
-            console.error('Erro ao configurar a solicitação:', error.message);
+            // Adicione este bloco para imprimir mais informações sobre o erro
+            if (error.response) {
+                // O servidor retornou um status diferente de 2xx
+                console.error('Status do erro:', error.response.status);
+                console.error('Dados do erro:', error.response.data);
+            } else if (error.request) {
+                // A solicitação foi feita, mas não recebeu resposta
+                console.error('Erro de solicitação:', error.request);
+            } else {
+                // Algo aconteceu ao configurar a solicitação
+                console.error('Erro ao configurar a solicitação:', error.message);
+            }
+
+            // Trate o erro conforme necessário, como exibindo uma mensagem de erro amigável para o usuário
         }
+    };
 
-        // Trate o erro conforme necessário, como exibindo uma mensagem de erro amigável para o usuário
+    const updateUser = async (data) => {
+        try {
+            console.log(user);
+            const token = sessionStorage.getItem('token')
+            const response = await axios.put("http://localhost:3000/profile",{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Adiciona o token de autorização
+                },
+                userId: user.id,
+                newEmail: data.newEmail,
+                newNickname: data.newNickname,
+                newPassword: data.newPassword,
+                confirmPassword: data.confirmPassword
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
-};
 
     return (
         <main className="main">
@@ -83,36 +125,24 @@ const handleDeleteUser = async () => {
                     </Link>
                     <h1>Meu Perfil</h1>
                 </div>
-                <form action="" className="changeData" autoComplete="custom-value">
-                    <FormField
-                        label="Email:"
-                        htmlFor="email"
-                        type="text"
-                        placeholder="Digite seu email..."
-                        autocomplete="email"
-                    />
-                    <FormField
-                        label="Nickname:"
-                        htmlFor="nickname"
-                        type="text"
-                        placeholder="Digite seu apelido..."
-                        autocomplete="nickname"
-                    />
-                    <FormField
-                        label="Senha:"
-                        htmlFor="password"
-                        type="password"
-                        placeholder="Digite uma nova senha..."
-                        autoComplete="current-password"
-                    />
-                    <FormField
-                        label="Confirme sua senha:"
-                        htmlFor="passwordConfirm"
-                        type="password"
-                        placeholder="Digite sua senha novamente..."
-                        autoComplete="current-password"
-                    />
+                <form className="changeData" autoComplete="custom-value" onSubmit={handleSubmit(updateUser)} noValidate>
+                    
+                        <label htmlFor="email">Email:</label>
+                        <input type="text" id="email" placeholder="Digite seu email..." {...register("newEmail")}/>
+                        {errors?.newEmail?.message}
+                    
+                        <label htmlFor="nickname">Nickname:</label>
+                        <input type="text" id="nickname" placeholder="Digite seu apelido..." {...register("newNickname")} />
+                        {errors?.newNickname?.message}
 
+                        <label htmlFor="password">Senha:</label>
+                        <input type="password" id="password" placeholder="Digite uma nova senha..." {...register("newPassword")} />
+                        {errors?.newPassword?.message}
+                    
+                        <label htmlFor="passwordConfirm">Confirme sua senha</label>
+                        <input type="password" id="passwordConfirm" placeholder="Digite sua senha novamente..." {...register("confirmPassword")} />
+                        {errors?.confirmPassword?.message}
+                    
                     <Button text="Alterar dados" type="submit" />
                 </form>
                 <div className="removeAccount">

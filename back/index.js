@@ -121,13 +121,11 @@ app.delete('/profile', verificaToken, async (req, res) => {
     console.log("req body", req.body)
     try {
         const userId = req.body.id;
-        console.log("userId is", userId)
         const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
         const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
         console.log('users: ', users)
         //Encontra o usuário pelo ID
         const userIndex = users.findIndex(u => u.id === userId);
-        console.log('userIndex: ', userIndex)
         if (userIndex === -1) {
             return res.status(404).send('Usuário não encontrado');
         }
@@ -147,8 +145,9 @@ app.delete('/profile', verificaToken, async (req, res) => {
 
 });
 
-app.put('/profile', verificaToken, async (req, res) => {
-    const { nickname, email, password } = req.body;
+app.put('/profile', async (req, res) => {
+    console.log(req.body.userId);
+    const { userId, newEmail, newNickname, newPassword, confirmPassword } = req.body;
     const jsonPath = path.join(
         __dirname,
         '.',
@@ -158,18 +157,24 @@ app.put('/profile', verificaToken, async (req, res) => {
     const data = JSON.parse(
         fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' })
     );
-    const userIndex = data.findIndex(
-        user => user.nickname === nickname && user.email === email && user.password === password
-    );
+    
+    const userIndex = data.findIndex(u => u.id === userId);
+    console.log('userIndex: ', userIndex)
+        
     if (userIndex !== -1) {
+        // Erro caso as senhas sejam diferentes
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({ message: 'A nova senha e a confirmação de senha não coincidem' });
+        }
         // Modifica as informações do usuário
         data[userIndex].nickname = req.body.newNickname || data[userIndex].nickname;
         data[userIndex].email = req.body.newEmail || data[userIndex].email;
         data[userIndex].password = req.body.newPassword || data[userIndex].password;
+        
 
         // Salva as alterações de volta no arquivo JSON
         fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), { encoding: 'utf8', flag: 'w'});
 
-        res.status(200).json({ message: 'Informações do usuário modificadas com sucesso'});
+        return res.status(200).json({ message: 'Informações do usuário modificadas com sucesso'});
     }
 });
