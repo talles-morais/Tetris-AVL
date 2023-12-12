@@ -252,3 +252,19 @@ app.get('/score', (req,res) => {
 
     }
 })
+
+app.get('/ranking', (req,res) => {
+    const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+
+    try{
+        const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
+        const usesTop = data.users.sort((a, b) => b.score - a.score);
+
+        const top3 = usesTop.slice(0, 3).map(usuario => usuario.nickname);
+
+        top3.forEach(nickname => console.log(nickname));
+        } catch (error) {
+        console.error('Erro ao ler o arquivo JSON:', error.message);
+    }
+
+});

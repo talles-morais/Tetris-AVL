@@ -32,9 +32,9 @@
     "nickname": "taison",
     "email": "taison@gmail.com",
     "password": "$2b$10$WerupXCuV/JIOVp0OxWL4.eYNR9GaiXyL18bqqy3cA.yL6MWGAA6a",
-    "rating": null,
-    "score": 0,
-    "lines": 0
+    "rating": 4,
+    "score": 2,
+    "lines": 2
   },
   {
     "id": 6,
