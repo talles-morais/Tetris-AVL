@@ -75,6 +75,8 @@ export default function Home() {
             'https://www.linkedin.com/in/murilo-martinez-zaina-b9537629a/',
     };
 
+    
+
     return (
         <main className="main">
             <section className="mainContent">

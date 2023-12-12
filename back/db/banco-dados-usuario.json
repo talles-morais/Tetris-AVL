@@ -10,5 +10,12 @@
     "nickname": "murilo",
     "email": "murilo@gmil.com",
     "password": "$2b$10$b87UrcJGPopSHRE0g3P9kOHjRC9d2cgK4TRWsHeaY1mJHH4EvQ0Na"
+  },
+  {
+    "id": 3,
+    "nickname": "talinho",
+    "email": "talinho@gmail.com",
+    "password": "$2b$10$TYJIsXhZUaeZZURNi.xJtOm/FO491byPsQ.dkXsKDxVKAwgNrdbH.",
+    "rating": 4
   }
 ]

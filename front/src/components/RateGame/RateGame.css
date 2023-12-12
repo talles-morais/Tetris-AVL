@@ -3,7 +3,14 @@
     color: #fff;
 }
 
-.stars > button {
-    border: none;
-    background-color: transparent;
+.star {
+    font-size: 3rem;
+}
+
+.star:hover {
+    color: #F9D313;
+}
+
+.active {
+    color: #F9D313;
 }

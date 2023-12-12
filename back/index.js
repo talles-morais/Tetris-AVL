@@ -69,8 +69,7 @@ app.post('/create', async (req, res) => {
     );
     for (let user of data) {
         if (user.email === email) {
-            res.status(409).send(`Usuario com email ${email} já existe.`);
-            break;
+            return res.status(409).send(`Usuario com email ${email} já existe.`);
         }
     }
     const id = data.length + 1;
@@ -137,10 +136,10 @@ app.delete('/profile', verificaToken, async (req, res) => {
         fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), 'utf-8');
 
         // Envia uma resposta de volta ao cliente
-        res.send('Usuário excluído com sucesso');
+        return res.send('Usuário excluído com sucesso');
     } catch (error) {
         console.error('Erro ao excluir usuário:', error);
-        res.status(500).send('Erro ao processar a solicitação');
+        return res.status(500).send('Erro ao processar a solicitação');
     }
 
 });
@@ -180,3 +179,29 @@ app.put('/profile', async (req, res) => {
         return res.status(200).json({ message: 'Informações do usuário modificadas com sucesso'});
     }
 });
+
+app.put('/rate', async (req, res) =>{
+
+    try {
+        const userId = req.body.userId;
+        const rating = req.body.rating;
+        const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+        const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
+
+        if (userId) {
+            // Atualizar a avaliação do usuário
+            users[userId-1].rating = rating;
+
+            fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), { encoding: 'utf8', flag: 'w' });
+
+            return res.status(200).json({ success: true, message: 'Avaliação salva com sucesso.' });
+
+        } else {
+            return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
+        }
+
+    } catch(error) {
+        console.error('Erro ao avaliar:', error);
+    }
+
+})
