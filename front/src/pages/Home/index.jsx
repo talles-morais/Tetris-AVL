@@ -47,6 +47,7 @@ export default function Home() {
                 data
             );
             login(response.data.user);
+            localStorage.setItem('id', JSON.stringify(response.data.user.id));
             const token = response.data.token;
             sessionStorage.setItem('token', token);
             if (token) setValidate('Validado');
@@ -88,7 +89,7 @@ export default function Home() {
                         <Letter text="R" color="00C955" />
                         <Letter text="I" color="3477DC" />
                         <Letter text="S" color="8E0E9B" />
-                        <Letter text=" AVL" color="FFF" />
+                        
                     </h1>
                     <h2 className="subtitle">Bem vindo ao jogo!</h2>
                     <div className="description">

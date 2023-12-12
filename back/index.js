@@ -205,3 +205,8 @@ app.put('/rate', async (req, res) =>{
     }
 
 })
+
+app.put('/score', async (req, res) =>{
+    console.log("Body: "req.body)
+
+})

@@ -41236,6 +41236,31 @@ class Game {
         // start the updates
         this.app.ticker.add(this.update, this);
     }
+
+    exportScoreToBackend() {
+        const scoreData = {
+            score: this.scores, 
+        };
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        fetch('http://localhost:3000/score', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: {score: JSON.stringify(scoreData), id: storedUser},
+        })
+        .then(response => {
+            // Verifique a resposta do backend
+            if (response.ok) {
+                console.log('Score exportado com sucesso para o backend!');
+            } else {
+                console.error('Falha ao exportar o score para o backend.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro na requisição para o backend:', error);
+        });
+    }
     
     /**
      * Add new state
