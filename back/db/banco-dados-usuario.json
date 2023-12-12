@@ -17,5 +17,12 @@
     "email": "talinho@gmail.com",
     "password": "$2b$10$TYJIsXhZUaeZZURNi.xJtOm/FO491byPsQ.dkXsKDxVKAwgNrdbH.",
     "rating": 4
+  },
+  {
+    "id": 4,
+    "nickname": "teste",
+    "email": "tetris@gmail.com",
+    "password": "$2b$10$xhqscysPDO3gJ87L8GC3VuQQ/hkQgPGxqiK/KHrNQnjfreQG75iMO",
+    "rating": null
   }
 ]

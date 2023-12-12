@@ -6,7 +6,7 @@ import StatusDisplay from '../../components/StatusDisplay';
 import userIcon from '../../assets/icons/userIcon.png';
 import RateGame from '../../components/RateGame';
 import { useAuth } from '../../contexts/AuthContext';
-import GraphicsExample from '../../components/Tetris';
+import Tetris from '../../components/Tetris';
 import './Game.css';
 
 export default function Game() {
@@ -47,7 +47,13 @@ export default function Game() {
                 <Ranking />
             </aside>
             <div className="gameFrame">
-                <GraphicsExample/>
+                <iframe
+                    title="Projeto Vanilla"
+                    src="../../../public/dist/index.html"
+                    width="100%"
+                    height="99%"
+                    frameBorder="0"
+                />
             </div>
             <aside className="rightSide">
                 <StatusDisplay name="Score" data="50.000" />
