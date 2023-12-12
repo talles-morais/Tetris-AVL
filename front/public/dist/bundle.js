@@ -41191,22 +41191,12 @@ exports.default = TimeLimiter;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__menu_GameOver__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__menu_GamePaused__ = __webpack_require__(204);
 
-
-
-
-
-
-
-
-
-
 /**
  * Represent whole game and handles state changes
  */
 class Game {
     constructor(app) {
         this.app = app;
-        
         this.gameStates = {};
         this.state = null;
     }
@@ -41235,31 +41225,6 @@ class Game {
         
         // start the updates
         this.app.ticker.add(this.update, this);
-    }
-
-    exportScoreToBackend() {
-        const scoreData = {
-            score: this.scores, 
-        };
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        fetch('http://localhost:3000/score', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: {score: JSON.stringify(scoreData), id: storedUser},
-        })
-        .then(response => {
-            // Verifique a resposta do backend
-            if (response.success) {
-                console.log('Score exportado com sucesso para o backend!');
-            } else {
-                console.error('Falha ao exportar o score para o backend.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro na requisição para o backend:', error);
-        });
     }
     
     /**
@@ -41323,7 +41288,6 @@ class ScoreTable {
     constructor() {
         this.scores = [];
     }
-    
     add(lines, points) {
         this.scores.unshift({
             lines,
@@ -41592,6 +41556,28 @@ class GamePlay extends __WEBPACK_IMPORTED_MODULE_1__utils_State__["a" /* default
             }
         }
     }
+
+    async exportScoreToBackend(data) {
+        const userId = JSON.parse(localStorage.getItem('id'));
+        await fetch('http://localhost:3000/score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({score: data, id: userId}),
+        })
+        .then(response => {
+            // Verifique a resposta do backend
+            if (response.success) {
+                console.log('Score exportado com sucesso para o backend!');
+            } else {
+                console.error('Falha ao exportar o score para o backend.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro na requisição para o backend:', error);
+        });
+    }
     
     /**
      * Update score based on number of cleared rows
@@ -41600,6 +41586,7 @@ class GamePlay extends __WEBPACK_IMPORTED_MODULE_1__utils_State__["a" /* default
     updateScore(rows) {
         this.rowsCleared += rows;
         this.score += Math.pow(2, rows - 1);
+        this.exportScoreToBackend({points: this.score, lines: this.rowsCleared})
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = GamePlay;
