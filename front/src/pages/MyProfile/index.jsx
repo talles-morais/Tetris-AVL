@@ -169,7 +169,7 @@ export default function MyProfile() {
                     </div>
                     <div className="field">
                         <label htmlFor="passwordConfirm">
-                            Confirme sua senha
+                            Confirme sua senha:
                         </label>
                         <input
                             type="password"

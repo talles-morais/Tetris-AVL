@@ -4,5 +4,11 @@
     "nickname": "talves",
     "email": "talles",
     "password": "$2b$10$hckBkJ4Oqp2vYSnU5SefdOx.HY9WjqUeOdwRW4AGmL1G3PNIFGVU6"
+  },
+  {
+    "id": 2,
+    "nickname": "murilo",
+    "email": "murilo@gmil.com",
+    "password": "$2b$10$b87UrcJGPopSHRE0g3P9kOHjRC9d2cgK4TRWsHeaY1mJHH4EvQ0Na"
   }
 ]
