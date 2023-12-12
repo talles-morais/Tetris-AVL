@@ -25,7 +25,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const schema = yup
     .object({
         nickname: yup.string().required('Campo obrigatório'),
-        password: yup.string().required('Campo obrigatório'),
+        password: yup.string().min(4, "Mínimo de 4 caracteres").required('Campo obrigatório'),
     })
     .required();
 

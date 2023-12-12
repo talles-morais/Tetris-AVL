@@ -15,10 +15,13 @@ import * as yup from 'yup';
 
 const schema = yup
     .object({
-        newEmail: yup.string(),
+        newEmail: yup.string().email("Digite um email válido"),
         newNickname: yup.string(),
-        newPassword: yup.string(),
-        confirmPassword: yup.string(),
+        newPassword: yup.string().min(4, "Mínimo de 4 caracteres"),
+        confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('newPassword'), null], 'As senhas devem ser iguais')
+        .required('Campo Obrigatório'),
     })
     .required();
 
@@ -145,7 +148,7 @@ export default function MyProfile() {
                             placeholder="Digite seu email..."
                             {...register('newEmail')}
                         />
-                        {errors?.newEmail?.message}
+                        <span className='error'>{errors?.newEmail?.message}</span>
                     </div>
                     <div className="field">
                         <label htmlFor="nickname">Nickname:</label>
@@ -155,7 +158,7 @@ export default function MyProfile() {
                             placeholder="Digite seu apelido..."
                             {...register('newNickname')}
                         />
-                        {errors?.newNickname?.message}
+                        <span className="error">{errors?.newNickname?.message}</span>
                     </div>
                     <div className="field">
                         <label htmlFor="password">Senha:</label>
@@ -165,7 +168,7 @@ export default function MyProfile() {
                             placeholder="Digite uma nova senha..."
                             {...register('newPassword')}
                         />
-                        {errors?.newPassword?.message}
+                        <span className="error">{errors?.newPassword?.message}</span>
                     </div>
                     <div className="field">
                         <label htmlFor="passwordConfirm">
@@ -177,7 +180,7 @@ export default function MyProfile() {
                             placeholder="Digite sua senha novamente..."
                             {...register('confirmPassword')}
                         />
-                        {errors?.confirmPassword?.message}
+                        <span className="error">{errors?.confirmPassword?.message}</span>
                     </div>
                     <Button text="Alterar dados" type="submit" />
                 </form>
@@ -187,7 +190,7 @@ export default function MyProfile() {
                         label="Senha:"
                         htmlFor="deletePassword"
                         type="password"
-                        placeholder="Digite sua senha para confirmar a remoção da conta..."
+                        placeholder="Digite sua senha para remover conta..."
                         autocomplete="current-password" // Adiciona o atributo autocomplete
                     />
                     <Button

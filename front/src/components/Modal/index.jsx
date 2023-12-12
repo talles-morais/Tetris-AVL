@@ -15,9 +15,9 @@ import { useState } from 'react';
 
 const schema = yup
     .object({
-        email: yup.string().required('Campo obrigatório'),
+        email: yup.string().email('Digite um email válido').required('Campo obrigatório'),
         nickname: yup.string().required('Campo obrigatório'),
-        password: yup.string().required('Campo obrigatório'),
+        password: yup.string().min(4, "Mínimo de 4 caracteres").required('Campo obrigatório'),
         confirmPassword: yup
             .string()
             .oneOf([yup.ref('password'), null], 'As senhas devem ser iguais')
