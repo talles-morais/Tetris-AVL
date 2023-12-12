@@ -40,6 +40,8 @@ export default function Game() {
         return <p>Token Inválido, faça login!</p>
     }
 
+    
+
     return (
         <main className="gameMain">
             <aside className="leftSide">
@@ -57,7 +59,7 @@ export default function Game() {
             </div>
             <aside className="rightSide">
                 <StatusDisplay name="Score" data="50.000" />
-                <StatusDisplay name="Erros" data="2" />
+                <StatusDisplay name="Linhas" data="2" />
                 <RateGame />
             </aside>
         </main>
