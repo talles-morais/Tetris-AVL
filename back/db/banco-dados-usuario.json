@@ -23,6 +23,8 @@
     "nickname": "teste",
     "email": "tetris@gmail.com",
     "password": "$2b$10$xhqscysPDO3gJ87L8GC3VuQQ/hkQgPGxqiK/KHrNQnjfreQG75iMO",
-    "rating": null
+    "rating": 5,
+    "score": 1,
+    "lines": 1
   }
 ]

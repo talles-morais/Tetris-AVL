@@ -206,7 +206,29 @@ app.put('/rate', async (req, res) =>{
 
 })
 
-app.put('/score', async (req, res) =>{
-    console.log("Body: "req.body)
+app.post('/score', async (req, res) =>{
+    console.log("Body: ", req.body)
+    try {
+        const score = req.body.score.points;
+        const lines = req.body.score.lines;
+        const userId = req.body.id;
+        const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+        const users = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
 
+        if (userId) {
+            // Atualizar a avaliação do usuário
+            users[userId-1].score = score;
+            users[userId-1].lines = lines;
+
+            fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), { encoding: 'utf8', flag: 'w' });
+
+            return res.status(200).json({ success: true, message: 'Avaliação salva com sucesso.' });
+
+        } else {
+            return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
+        }
+
+    } catch(error) {
+        console.error('Erro ao avaliar:', error);
+    }
 })
