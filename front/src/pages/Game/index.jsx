@@ -19,6 +19,24 @@ export default function Game() {
         },
     };
 
+    const fetchData = async () => {
+        const response = await fetch('http://localhost:3000/score', {
+            headers: {
+                id: user.id
+            }
+        });
+        const newScore = await response.json();
+        setUserScore(newScore);
+    }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetchData();
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
     useEffect(() => {
         async function valida() {
             try {
@@ -36,30 +54,9 @@ export default function Game() {
         valida();
     }, []);
 
-    useEffect(() => {
-        async function getScore() {
-          try {
-            const response = await axios.get("http://localhost:3000/score", {
-                headers: {
-                    id: user.id
-                }
-            }
-            );
-    
-            setUserScore(response.data);
-            console.log("score ",response.data);
-          } catch (error) {
-            console.error('Erro ao fazer a solicitação: ', error);
-          }
-        };
-    
-        getScore();
-    }, [user]);
-
     if(!validate){
         return <p>Token Inválido, faça login!</p>
     }
-    console.log(userScore)
     return (
         <main className="gameMain">
             <aside className="leftSide">

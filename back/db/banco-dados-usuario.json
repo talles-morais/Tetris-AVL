@@ -35,5 +35,14 @@
     "rating": null,
     "score": 0,
     "lines": 0
+  },
+  {
+    "id": 6,
+    "nickname": "berimbau",
+    "email": "Polonia@gmail.com",
+    "password": "$2b$10$6Wwq3T2p5JJ8PjiouDJiHO.r9./CY8CS5oLLEIlnfOMFpcHXd01eG",
+    "rating": null,
+    "score": 11,
+    "lines": 11
   }
 ]

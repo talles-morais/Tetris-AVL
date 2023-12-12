@@ -41568,7 +41568,7 @@ class GamePlay extends __WEBPACK_IMPORTED_MODULE_1__utils_State__["a" /* default
         })
         .then(response => {
             // Verifique a resposta do backend
-            if (response.success) {
+            if (response.ok) {
                 console.log('Score exportado com sucesso para o backend!');
             } else {
                 console.error('Falha ao exportar o score para o backend.');

@@ -218,10 +218,10 @@ app.post('/score', async (req, res) =>{
             // Atualizar a avaliação do usuário
             users[userId-1].score = score;
             users[userId-1].lines = lines;
-
+            console.log(users[userId-1]);
             fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), { encoding: 'utf8', flag: 'w' });
 
-            return res.status(200).json({ success: true, message: 'Avaliação salva com sucesso.' });
+            return res.status(200).json({ success: true, message: 'Score atualizado' });
 
         } else {
             return res.status(404).json({ success: false, message: 'Usuário não encontrado.' });
