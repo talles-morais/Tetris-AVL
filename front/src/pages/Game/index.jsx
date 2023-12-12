@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import ProfileMenu from '../../components/ProfileMenu';
 import Ranking from '../../components/Ranking';
@@ -6,6 +6,7 @@ import StatusDisplay from '../../components/StatusDisplay';
 import userIcon from '../../assets/icons/userIcon.png';
 import RateGame from '../../components/RateGame';
 import { useAuth } from '../../contexts/AuthContext';
+import GraphicsExample from '../../components/Tetris';
 import './Game.css';
 
 export default function Game() {
@@ -45,7 +46,9 @@ export default function Game() {
                 <ProfileMenu photo={userIcon} nickname={user.nickname} logout={logout}/>
                 <Ranking />
             </aside>
-            <div className="gameFrame"></div>
+            <div className="gameFrame">
+                <GraphicsExample/>
+            </div>
             <aside className="rightSide">
                 <StatusDisplay name="Score" data="50.000" />
                 <StatusDisplay name="Erros" data="2" />
