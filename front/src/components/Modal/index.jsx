@@ -38,6 +38,7 @@ export default function Modal({ isOpen, toClose }) {
         try {
             const response = await axios.post('http://localhost:3000/create', data);
             setValidate(response.data);
+            alert(response.data);
             if(response.data.includes('criado'))
                 toClose();
         } catch (error) {

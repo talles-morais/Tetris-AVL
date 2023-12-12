@@ -119,9 +119,9 @@ export default function MyProfile() {
                 newPassword: data.newPassword,
                 confirmPassword: data.confirmPassword,
             });
-            console.log(response.data);
+            alert(response.data);
         } catch (error) {
-            console.log(error);
+            alert(error);
         }
     };
 

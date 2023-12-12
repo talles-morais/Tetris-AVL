@@ -80,7 +80,7 @@ app.post('/create', async (req, res) => {
     const novo = new User(id, nickname, email, senhaCrypt);
     data.push(novo);
     fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2));
-    res.send(`Tudo certo usuario criado com sucesso.`);
+    res.send(`Usuário criado com sucesso.`);
 });
 
 app.get('/game', verificaToken,  (req,res) => {
@@ -176,7 +176,7 @@ app.put('/profile', async (req, res) => {
         // Salva as alterações de volta no arquivo JSON
         fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), { encoding: 'utf8', flag: 'w'});
 
-        return res.status(200).json({ message: 'Informações do usuário modificadas com sucesso'});
+        return res.status(200).json('Informações do usuário modificadas com sucesso');
     }
 });
 
