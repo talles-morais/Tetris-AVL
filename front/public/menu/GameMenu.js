@@ -7,7 +7,7 @@ import BaseMenu from './BaseMenu';
  */
 export default class GameMenu extends BaseMenu {
     constructor(game) {
-        super(game, 'PIXTRIS');
+        super(game, 'Tetris');
         
         this.game = game;
     }

@@ -24,7 +24,7 @@ export const simpleTextStyle = new TextStyle({
  * Display Game Over screen
  */
 export default class BaseMenu extends State {
-    constructor(game, titleText = 'PIXTRIS', infoText = 'Press SPACE to play') {
+    constructor(game, titleText = 'Tetris', infoText = 'Press SPACE to play') {
         super();
         
         this.game = game;

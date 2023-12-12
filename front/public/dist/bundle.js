@@ -11670,7 +11670,7 @@ const simpleTextStyle = new __WEBPACK_IMPORTED_MODULE_0_pixi_js__["TextStyle"]({
  * Display Game Over screen
  */
 class BaseMenu extends __WEBPACK_IMPORTED_MODULE_1__utils_State__["a" /* default */] {
-    constructor(game, titleText = 'PIXTRIS', infoText = 'Press SPACE to play') {
+    constructor(game, titleText = 'TETRIS', infoText = 'Press SPACE to play') {
         super();
         
         this.game = game;
@@ -41908,7 +41908,7 @@ class Tetromino {
  */
 class GameMenu extends __WEBPACK_IMPORTED_MODULE_0__BaseMenu__["a" /* default */] {
     constructor(game) {
-        super(game, 'PIXTRIS');
+        super(game, 'TETRIS');
         
         this.game = game;
     }
