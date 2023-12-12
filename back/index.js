@@ -207,7 +207,6 @@ app.put('/rate', async (req, res) =>{
 })
 
 app.post('/score', async (req, res) =>{
-    console.log("Body: ", req.body)
     try {
         const score = req.body.score.points;
         const lines = req.body.score.lines;
@@ -230,5 +229,26 @@ app.post('/score', async (req, res) =>{
 
     } catch(error) {
         console.error('Erro ao avaliar:', error);
+    }
+})
+
+app.get('/score', (req,res) => {
+    console.log("teste get: ", req.headers.id)
+    const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
+    const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
+    const userId = req.headers.id
+
+    try {
+        if (userId) {
+            console.log(data[userId-1]);
+            const { score, lines } = data[userId-1];
+            console.log({ score, lines });
+            return res.json({score, lines});
+        } else {
+            res.status(404).send(`Usuário com ID ${userId} não encontrado no arquivo`);
+        }
+    } catch (parseError) {
+        console.error('Erro ao analisar o JSON:', parseError);
+
     }
 })
