@@ -9,15 +9,6 @@
     "lines": 1
   },
   {
-    "id": 2,
-    "nickname": "bosco",
-    "email": "burro2@gmil.com",
-    "password": "$2b$10$1SxDmQH2JHjHwt8pvWwpwevYnn5PjZH.lVYxZbc/E3YluzefcL4T2",
-    "rating": null,
-    "score": 1,
-    "lines": 1
-  },
-  {
     "id": 3,
     "nickname": "bauducco",
     "email": "burro3@gmil.com",
