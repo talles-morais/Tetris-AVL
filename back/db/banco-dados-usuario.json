@@ -1,20 +1,3 @@
 [
-  {
-    "id": 1,
-    "nickname": "hokama",
-    "email": "burro1@gmil.com",
-    "password": "$2b$10$CaZ9RymzSaS2aZmu3tOsnOX6LnLvGzts7gFvw60g5OF6iAK5XvccW",
-    "rating": null,
-    "score": 1,
-    "lines": 1
-  },
-  {
-    "id": 3,
-    "nickname": "bauducco",
-    "email": "burro3@gmil.com",
-    "password": "$2b$10$LMoUrCH10iVXCNOwRZWCo.SowUSpXURdOM6x3MkL3n2z8/D9Lb1NG",
-    "rating": null,
-    "score": 2,
-    "lines": 2
-  }
+  
 ]

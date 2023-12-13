@@ -131,6 +131,10 @@ app.delete('/profile', verificaToken, async (req, res) => {
 
         // Encontra e exclue o usuário no array de usuários
         users.splice(userIndex, 1);
+        for(let user of users){
+            if(user.id > userIndex)
+                user.id = user.id - 1;
+        }
 
         // Salva as alterações de volta no arquivo JSON
         fs.writeFileSync(jsonPath, JSON.stringify(users, null, 2), 'utf-8');

@@ -55,6 +55,8 @@ export default function Home() {
             if (error.response && error.response.status === 422) {
                 // Senha incorreta
                 alert("Senha Incorreta");
+            }else if(error.response.status === 409){
+                alert("Usuário não encontrado")
             }
             setValidate(error.response.data);
         }
