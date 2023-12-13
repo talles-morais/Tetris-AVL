@@ -29,20 +29,20 @@
   },
   {
     "id": 5,
-    "nickname": "taison",
-    "email": "taison@gmail.com",
-    "password": "$2b$10$WerupXCuV/JIOVp0OxWL4.eYNR9GaiXyL18bqqy3cA.yL6MWGAA6a",
-    "rating": 4,
-    "score": 1,
-    "lines": 1
-  },
-  {
-    "id": 6,
     "nickname": "berimbau",
     "email": "Polonia@gmail.com",
     "password": "$2b$10$6Wwq3T2p5JJ8PjiouDJiHO.r9./CY8CS5oLLEIlnfOMFpcHXd01eG",
     "rating": null,
     "score": 11,
     "lines": 11
+  },
+  {
+    "id": 6,
+    "nickname": "reio",
+    "email": "rei@gmail.com",
+    "password": "$2b$10$PrLjmOtoTY1L6OMq51ZCB.XnLepTDKUAHydBIcmg0R2SMK3bogaTa",
+    "rating": null,
+    "score": 1,
+    "lines": 1
   }
 ]

@@ -260,9 +260,10 @@ app.get('/ranking', (req,res) => {
         const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
         const usesTop = data.users.sort((a, b) => b.score - a.score);
 
-        const top3 = usesTop.slice(0, 3).map(user => user.nickname);
+        const top3 = usesTop.slice(0, 3).map(user => user.nickname, user.score);
 
         top3.forEach(nickname => res.json(nickname));
+        top3.forEach(score => res.json(score));
         } catch (error) {
         console.error('Erro ao ler o arquivo JSON:', error.message);
     }
