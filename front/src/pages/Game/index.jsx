@@ -57,6 +57,7 @@ export default function Game() {
     if(!validate){
         return <p>Token Inválido, faça login!</p>
     }
+    
     return (
         <main className="gameMain">
             <aside className="leftSide">

@@ -233,14 +233,12 @@ app.post('/score', async (req, res) =>{
 })
 
 app.get('/score', (req,res) => {
-    console.log("teste get: ", req.headers.id)
     const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
     const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
     const userId = req.headers.id
 
     try {
         if (userId) {
-            console.log(data[userId-1]);
             const { score, lines } = data[userId-1];
             console.log({ score, lines });
             return res.json({score, lines});
@@ -254,17 +252,19 @@ app.get('/score', (req,res) => {
 })
 
 app.get('/ranking', (req,res) => {
-    const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
-
+    console.log(req.headers);
     try{
+        const jsonPath = path.join(__dirname, '.', 'db', 'banco-dados-usuario.json');
         const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf8', flag: 'r' }));
-        const usesTop = data.users.sort((a, b) => b.score - a.score);
+        const usesTop = data.sort((a, b) => b.score - a.score);
+        console.log(usesTop);
 
-        const top3 = usesTop.slice(0, 3).map(user => user.nickname, user.score);
-
-        top3.forEach(nickname => res.json(nickname));
-        top3.forEach(score => res.json(score));
-        } catch (error) {
+        const top3 = usesTop.slice(0, 3).map(user => ({nickname: user.nickname, score: user.score}));
+        console.log(top3);
+        // top3.forEach(nickname => res.json(nickname));
+        // top3.forEach(score => res.json(score));
+        return res.json(top3);
+    } catch (error) {
         console.error('Erro ao ler o arquivo JSON:', error.message);
     }
 

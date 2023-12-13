@@ -1,48 +1,29 @@
 [
   {
     "id": 1,
-    "nickname": "talves",
-    "email": "talles",
-    "password": "$2b$10$hckBkJ4Oqp2vYSnU5SefdOx.HY9WjqUeOdwRW4AGmL1G3PNIFGVU6"
-  },
-  {
-    "id": 2,
-    "nickname": "murilo",
-    "email": "murilo@gmil.com",
-    "password": "$2b$10$b87UrcJGPopSHRE0g3P9kOHjRC9d2cgK4TRWsHeaY1mJHH4EvQ0Na"
-  },
-  {
-    "id": 3,
-    "nickname": "talinho",
-    "email": "talinho@gmail.com",
-    "password": "$2b$10$TYJIsXhZUaeZZURNi.xJtOm/FO491byPsQ.dkXsKDxVKAwgNrdbH.",
-    "rating": 4
-  },
-  {
-    "id": 4,
-    "nickname": "teste",
-    "email": "tetris@gmail.com",
-    "password": "$2b$10$xhqscysPDO3gJ87L8GC3VuQQ/hkQgPGxqiK/KHrNQnjfreQG75iMO",
-    "rating": 5,
-    "lines": 5,
-    "score": 6
-  },
-  {
-    "id": 5,
-    "nickname": "berimbau",
-    "email": "Polonia@gmail.com",
-    "password": "$2b$10$6Wwq3T2p5JJ8PjiouDJiHO.r9./CY8CS5oLLEIlnfOMFpcHXd01eG",
-    "rating": null,
-    "score": 11,
-    "lines": 11
-  },
-  {
-    "id": 6,
-    "nickname": "reio",
-    "email": "rei@gmail.com",
-    "password": "$2b$10$PrLjmOtoTY1L6OMq51ZCB.XnLepTDKUAHydBIcmg0R2SMK3bogaTa",
+    "nickname": "hokama",
+    "email": "burro1@gmil.com",
+    "password": "$2b$10$CaZ9RymzSaS2aZmu3tOsnOX6LnLvGzts7gFvw60g5OF6iAK5XvccW",
     "rating": null,
     "score": 1,
     "lines": 1
+  },
+  {
+    "id": 2,
+    "nickname": "bosco",
+    "email": "burro2@gmil.com",
+    "password": "$2b$10$1SxDmQH2JHjHwt8pvWwpwevYnn5PjZH.lVYxZbc/E3YluzefcL4T2",
+    "rating": null,
+    "score": 1,
+    "lines": 1
+  },
+  {
+    "id": 3,
+    "nickname": "bauducco",
+    "email": "burro3@gmil.com",
+    "password": "$2b$10$LMoUrCH10iVXCNOwRZWCo.SowUSpXURdOM6x3MkL3n2z8/D9Lb1NG",
+    "rating": null,
+    "score": 2,
+    "lines": 2
   }
 ]
