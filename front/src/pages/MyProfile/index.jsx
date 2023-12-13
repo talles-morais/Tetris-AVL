@@ -15,13 +15,13 @@ import * as yup from 'yup';
 
 const schema = yup
     .object({
-        newEmail: yup.string().email("Digite um email válido"),
+        newEmail: yup.string().email('Digite um email válido'),
         newNickname: yup.string(),
-        newPassword: yup.string().min(4, "Mínimo de 4 caracteres"),
+        newPassword: yup.string().min(4, 'Mínimo de 4 caracteres'),
         confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('newPassword'), null], 'As senhas devem ser iguais')
-        .required('Campo Obrigatório'),
+            .string()
+            .oneOf([yup.ref('newPassword'), null], 'As senhas devem ser iguais')
+            .required('Campo Obrigatório'),
     })
     .required();
 
@@ -148,7 +148,9 @@ export default function MyProfile() {
                             placeholder="Digite seu email..."
                             {...register('newEmail')}
                         />
-                        <span className='error'>{errors?.newEmail?.message}</span>
+                        <span className="error">
+                            {errors?.newEmail?.message}
+                        </span>
                     </div>
                     <div className="field">
                         <label htmlFor="nickname">Nickname:</label>
@@ -158,7 +160,9 @@ export default function MyProfile() {
                             placeholder="Digite seu apelido..."
                             {...register('newNickname')}
                         />
-                        <span className="error">{errors?.newNickname?.message}</span>
+                        <span className="error">
+                            {errors?.newNickname?.message}
+                        </span>
                     </div>
                     <div className="field">
                         <label htmlFor="password">Senha:</label>
@@ -168,7 +172,9 @@ export default function MyProfile() {
                             placeholder="Digite uma nova senha..."
                             {...register('newPassword')}
                         />
-                        <span className="error">{errors?.newPassword?.message}</span>
+                        <span className="error">
+                            {errors?.newPassword?.message}
+                        </span>
                     </div>
                     <div className="field">
                         <label htmlFor="passwordConfirm">
@@ -180,7 +186,9 @@ export default function MyProfile() {
                             placeholder="Digite sua senha novamente..."
                             {...register('confirmPassword')}
                         />
-                        <span className="error">{errors?.confirmPassword?.message}</span>
+                        <span className="error">
+                            {errors?.confirmPassword?.message}
+                        </span>
                     </div>
                     <Button text="Alterar dados" type="submit" />
                 </form>

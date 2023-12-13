@@ -15,9 +15,15 @@ import { useState } from 'react';
 
 const schema = yup
     .object({
-        email: yup.string().email('Digite um email válido').required('Campo obrigatório'),
+        email: yup
+            .string()
+            .email('Digite um email válido')
+            .required('Campo obrigatório'),
         nickname: yup.string().required('Campo obrigatório'),
-        password: yup.string().min(4, "Mínimo de 4 caracteres").required('Campo obrigatório'),
+        password: yup
+            .string()
+            .min(4, 'Mínimo de 4 caracteres')
+            .required('Campo obrigatório'),
         confirmPassword: yup
             .string()
             .oneOf([yup.ref('password'), null], 'As senhas devem ser iguais')
@@ -26,7 +32,7 @@ const schema = yup
     .required();
 
 export default function Modal({ isOpen, toClose }) {
-    const [validate, setValidate] = useState('')
+    const [validate, setValidate] = useState('');
 
     const {
         register,
@@ -36,16 +42,17 @@ export default function Modal({ isOpen, toClose }) {
 
     const submit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:3000/create', data);
+            const response = await axios.post(
+                'http://localhost:3000/create',
+                data
+            );
             setValidate(response.data);
             alert(response.data);
-            if(response.data.includes('criado'))
-                toClose();
+            if (response.data.includes('criado')) toClose();
         } catch (error) {
             setValidate(error.response.data);
-        }   
-        
-    }
+        }
+    };
 
     if (isOpen) {
         return (
@@ -89,7 +96,9 @@ export default function Modal({ isOpen, toClose }) {
                         placeholder="Digite sua senha novamente..."
                         {...register('confirmPassword')}
                     />
-                    <span className="error">{errors?.confirmPassword?.message}</span>
+                    <span className="error">
+                        {errors?.confirmPassword?.message}
+                    </span>
                     <Button text="Cadastrar" type="submit" />
                 </form>
             </div>

@@ -25,7 +25,10 @@ import { useAuth } from '../../contexts/AuthContext';
 const schema = yup
     .object({
         nickname: yup.string().required('Campo obrigatório'),
-        password: yup.string().min(4, "Mínimo de 4 caracteres").required('Campo obrigatório'),
+        password: yup
+            .string()
+            .min(4, 'Mínimo de 4 caracteres')
+            .required('Campo obrigatório'),
     })
     .required();
 
@@ -54,9 +57,9 @@ export default function Home() {
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 // Senha incorreta
-                alert("Senha Incorreta");
-            }else if(error.response.status === 409){
-                alert("Usuário não encontrado")
+                alert('Senha Incorreta');
+            } else if (error.response.status === 409) {
+                alert('Usuário não encontrado');
             }
             setValidate(error.response.data);
         }
@@ -82,8 +85,6 @@ export default function Home() {
             'https://www.linkedin.com/in/murilo-martinez-zaina-b9537629a/',
     };
 
-    
-
     return (
         <main className="main">
             <section className="mainContent">
@@ -95,7 +96,6 @@ export default function Home() {
                         <Letter text="R" color="00C955" />
                         <Letter text="I" color="3477DC" />
                         <Letter text="S" color="8E0E9B" />
-                        
                     </h1>
                     <h2 className="subtitle">Bem vindo ao jogo!</h2>
                     <div className="description">

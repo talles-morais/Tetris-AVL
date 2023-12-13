@@ -10,8 +10,8 @@ import './Game.css';
 
 export default function Game() {
     const [validate, setValidate] = useState(false);
-    const [userScore, setUserScore] = useState({score: 0, lines: 0});
-    const { user, logout }= useAuth();
+    const [userScore, setUserScore] = useState({ score: 0, lines: 0 });
+    const { user, logout } = useAuth();
 
     const config = {
         headers: {
@@ -22,12 +22,12 @@ export default function Game() {
     const fetchData = async () => {
         const response = await fetch('http://localhost:3000/score', {
             headers: {
-                id: user.id
-            }
+                id: user.id,
+            },
         });
         const newScore = await response.json();
         setUserScore(newScore);
-    }
+    };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -40,8 +40,8 @@ export default function Game() {
     useEffect(() => {
         async function valida() {
             try {
-                const resposta = await axios.get(   
-                    "http://localhost:3000/game",
+                const resposta = await axios.get(
+                    'http://localhost:3000/game',
                     config
                 );
                 console.log(resposta.status);
@@ -54,14 +54,18 @@ export default function Game() {
         valida();
     }, []);
 
-    if(!validate){
-        return <p>Token Inválido, faça login!</p>
+    if (!validate) {
+        return <p>Token Inválido, faça login!</p>;
     }
-    
+
     return (
         <main className="gameMain">
             <aside className="leftSide">
-                <ProfileMenu photo={userIcon} nickname={user.nickname} logout={logout}/>
+                <ProfileMenu
+                    photo={userIcon}
+                    nickname={user.nickname}
+                    logout={logout}
+                />
                 <Ranking />
             </aside>
             <div className="gameFrame">
@@ -75,7 +79,7 @@ export default function Game() {
             </div>
             <aside className="rightSide">
                 <StatusDisplay name="Score" data={userScore.score} />
-                <StatusDisplay name="Linhas" data={userScore.lines}/>
+                <StatusDisplay name="Linhas" data={userScore.lines} />
                 <RateGame />
             </aside>
         </main>
