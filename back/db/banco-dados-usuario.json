@@ -1,3 +1,11 @@
 [
-  
+  {
+    "id": 1,
+    "nickname": "talles1",
+    "email": "talles@gmail.com",
+    "password": "$2b$10$QeqbUgb79Nv2C2qQqrreWufBkj/oSUaY/y4VfEFZenIkpWnD5.QZ6",
+    "rating": null,
+    "score": 2,
+    "lines": 2
+  }
 ]
