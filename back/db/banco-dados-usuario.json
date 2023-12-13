@@ -1,20 +1,3 @@
 [
-  {
-    "id": 1,
-    "nickname": "talles1",
-    "email": "talles@gmail.com",
-    "password": "$2b$10$QeqbUgb79Nv2C2qQqrreWufBkj/oSUaY/y4VfEFZenIkpWnD5.QZ6",
-    "rating": null,
-    "score": 2,
-    "lines": 2
-  },
-  {
-    "id": 2,
-    "nickname": "teste",
-    "email": "teste@gmail.com",
-    "password": "$2b$10$YQi7H4Xr.Dlz5u7tMy23K.SvnwpjGonPR97hBtU4TjIXmmJJ2pidC",
-    "rating": null,
-    "score": 34,
-    "lines": 30
-  }
+  
 ]
