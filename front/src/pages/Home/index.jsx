@@ -52,6 +52,10 @@ export default function Home() {
             sessionStorage.setItem('token', token);
             if (token) setValidate('Validado');
         } catch (error) {
+            if (error.response && error.response.status === 422) {
+                // Senha incorreta
+                alert("Senha Incorreta");
+            }
             setValidate(error.response.data);
         }
     };
