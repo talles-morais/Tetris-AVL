@@ -1,3 +1,7 @@
+<h1>TETRIS</h1>
+
+<h2>Trabalho Final de XDES03 - Programação Web</h2>
+
 Nosso projeto consiste em um jogo TETRIS, com uma temática visual diferente, além de alguns adicionais ao game tão icônico que marcou a infância de tantas crianças nos anos 90.
 
 Para sua produção, foi utilizado React como framework fron-end para o desenvolvimento de nosso site, NodeJS como framework back-end, além do framework PixiJS para a criação do jogo.
